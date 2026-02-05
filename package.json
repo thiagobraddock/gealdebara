@@ -1,6 +1,9 @@
 {
   "name": "gealdebara",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
