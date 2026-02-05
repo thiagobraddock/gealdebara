@@ -1,1 +1,64 @@
 @import "tailwindcss";
+
+@theme {
+  /* World Scouting Purple Palette */
+  --color-scout-purple: #622599;
+  --color-scout-purple-dark: #4D006E;
+  --color-scout-purple-light: #7B3DB3;
+  --color-scout-purple-50: #f5f0f9;
+  --color-scout-purple-100: #ebe0f3;
+  --color-scout-purple-200: #d4bce6;
+
+  /* Support Colors */
+  --color-scout-pink: #FF8DFF;
+  --color-scout-red: #FF5655;
+  --color-scout-orange: #FFAE80;
+  --color-scout-blue-ocean: #0094B4;
+  --color-scout-blue-river: #82E6DE;
+  --color-scout-green-forest: #248737;
+  --color-scout-green-leaf: #9FED8F;
+
+  /* Neutrals */
+  --color-scout-white: #FFFFFF;
+  --color-scout-gray-50: #F9FAFB;
+  --color-scout-gray-100: #F3F4F6;
+  --color-scout-gray-200: #E5E7EB;
+  --color-scout-gray-300: #D1D5DB;
+  --color-scout-gray-500: #6B7280;
+  --color-scout-gray-600: #4B5563;
+  --color-scout-gray-900: #111827;
+
+  /* Animation */
+  --animate-fade-in-up: fade-in-up 0.6s ease-out both;
+  --animate-fade-in: fade-in 0.4s ease-out both;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

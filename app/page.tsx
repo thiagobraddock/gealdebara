@@ -1,184 +1,244 @@
+"use client"
+
+import { useEffect } from "react"
 import Image from "next/image"
-import { MapPin, Clock } from "lucide-react"
+import { MapPin, Clock, Instagram, ArrowRight } from "lucide-react"
 
 export default function Home() {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fade-in-up")
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+    )
+
+    document.querySelectorAll("[data-animate]").forEach((el) => {
+      observer.observe(el)
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-white px-4 py-16 gap-8">
-      {/* Logo do Grupo */}
-      <Image
-        src="/images/grupo-escoteiro-aldebara.jpeg"
-        alt="Logo do Grupo Escoteiro Aldebarã"
-        width={320}
-        height={320}
-        sizes="(max-width: 640px) 240px, 320px"
-        className="w-60 h-60 sm:w-80 sm:h-80 object-contain"
-        priority
-      />
+    <main className="flex min-h-screen flex-col">
+      {/* Hero Section - Full Purple */}
+      <section className="relative flex items-center justify-center bg-scout-purple overflow-hidden px-6 py-16 sm:py-20">
+        {/* Subtle gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-scout-purple-dark/30 via-transparent to-scout-purple-light/10" />
+        
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center text-center">
+          {/* Logo */}
+          <div className="mb-6">
+            <Image
+              src="/images/grupo-escoteiro-aldebara.jpeg"
+              alt="Logo do Grupo Escoteiro Aldebarã"
+              width={180}
+              height={180}
+              className="h-36 w-36 rounded-full object-contain sm:h-44 sm:w-44"
+              priority
+            />
+          </div>
 
-      {/* Título e localização */}
-      <div className="flex flex-col items-center gap-1 text-center">
-        <h1 className="text-3xl sm:text-4xl font-bold" style={{ color: "#2E7D32" }}>
-          Grupo Escoteiro Aldebarã
-        </h1>
-        <p className="text-lg sm:text-xl font-medium text-gray-600">
-          238 – Espírito Santo do Pinhal – SP
-        </p>
-      </div>
-
-      {/* Lema */}
-      <div className="flex items-center gap-3">
-        <span className="inline-block w-10 h-px" style={{ background: "#1565C0" }} />
-        <div className="flex items-center gap-2">
-          <Image
-            src="/images/icone-sempre-alerta.png"
-            alt="Sinal Escoteiro"
-            width={28}
-            height={28}
-            className="w-7 h-7 object-contain"
-          />
-          <p className="text-xl sm:text-2xl font-semibold tracking-widest uppercase" style={{ color: "#1565C0" }}>
-            Sempre Alerta
+          {/* Title */}
+          <h1 className="mb-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
+            Grupo Escoteiro Aldebarã
+          </h1>
+          
+          {/* Location */}
+          <p className="mb-6 text-base font-medium text-white/70 sm:text-lg">
+            238 – Espírito Santo do Pinhal – SP
           </p>
-        </div>
-        <span className="inline-block w-10 h-px" style={{ background: "#1565C0" }} />
-      </div>
 
-      {/* Divisor */}
-      <hr className="w-24 border-t-2 border-gray-200" />
-
-      {/* Badge "Em Breve" */}
-      <div className="rounded-full px-6 py-2" style={{ background: "#2E7D32" }}>
-        <p className="text-white text-lg sm:text-xl font-semibold tracking-wide uppercase">
-          Em Breve
-        </p>
-      </div>
-
-      {/* Seção Ramos Escoteiros */}
-      <section className="w-full max-w-7xl mt-16 px-4">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-12" style={{ color: "#2E7D32" }}>
-          Nossos Ramos
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
-          {/* Lobinho */}
-          <div className="flex flex-col items-center text-center">
-            <div className="w-32 h-32 mb-4">
+          {/* Motto with Icon */}
+          <div className="mb-8 flex items-center gap-3">
+            <span className="h-px w-10 bg-white/30" />
+            <div className="flex items-center gap-2">
               <Image
-                src="/images/logos-ramos/Logo_ramo_lobinho_principal.png"
-                alt="Ramo Lobinho"
-                width={128}
-                height={128}
-                className="w-full h-full object-contain"
+                src="/images/icone-sempre-alerta.png"
+                alt="Sinal Escoteiro"
+                width={28}
+                height={28}
+                className="h-7 w-7 object-contain invert brightness-0"
               />
-            </div>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              Crianças de 6,5 a 10 anos.<br />
-              Lema: <span className="font-semibold">"Melhor Possível"</span>.
-            </p>
-          </div>
-
-          {/* Escoteiro */}
-          <div className="flex flex-col items-center text-center">
-            <div className="w-32 h-32 mb-4">
-              <Image
-                src="/images/logos-ramos/Logo_ramo_escoteiro_principal.png"
-                alt="Ramo Escoteiro"
-                width={128}
-                height={128}
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              Adolescentes de 11 a 14 anos.<br />
-              Lema: <span className="font-semibold">"Sempre Alerta"</span>.
-            </p>
-          </div>
-
-          {/* Sênior */}
-          <div className="flex flex-col items-center text-center">
-            <div className="w-32 h-32 mb-4">
-              <Image
-                src="/images/logos-ramos/Logo_ramo_senior_principal.png"
-                alt="Ramo Sênior"
-                width={128}
-                height={128}
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              Adolescentes de 15 a 17 anos.<br />
-              Lema: <span className="font-semibold">"Sempre Alerta"</span>.
-            </p>
-          </div>
-
-          {/* Pioneiro */}
-          <div className="flex flex-col items-center text-center">
-            <div className="w-32 h-32 mb-4">
-              <Image
-                src="/images/logos-ramos/Logo_ramo_pioneiro_principal.png"
-                alt="Ramo Pioneiro"
-                width={128}
-                height={128}
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              Jovens de 18 a 20 anos.<br />
-              Lema: <span className="font-semibold">"Servir"</span>.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Informações de Contato */}
-      <section className="w-full max-w-3xl mt-16 px-4">
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8">
-          {/* Endereço */}
-          <div className="flex items-start gap-2 text-center sm:text-left">
-            <MapPin className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "#2E7D32" }} />
-            <div>
-              <p className="text-sm text-gray-700">
-                Rua Coronel Amando Vergueiro, 30
+              <p className="text-lg font-bold uppercase tracking-[0.15em] text-white sm:text-xl">
+                Sempre Alerta
               </p>
             </div>
+            <span className="h-px w-10 bg-white/30" />
           </div>
 
-          {/* Horário */}
-          <div className="flex items-start gap-2 text-center sm:text-left">
-            <Clock className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "#2E7D32" }} />
-            <div>
-              <p className="text-sm text-gray-700">
-                Sábados das 15:00h às 17:30h
-              </p>
-            </div>
-          </div>
-
-          {/* Instagram */}
+          {/* CTA Button */}
           <a
-            href="https://www.instagram.com/gealdebara238"
+            href="https://forms.gle/2cTakYnjQW1pmPo88"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-center sm:text-left hover:opacity-80 transition-opacity"
+            className="group inline-flex items-center gap-2 rounded-full border-2 border-white bg-white px-7 py-3 text-base font-bold text-scout-purple transition-all duration-200 hover:bg-transparent hover:text-white sm:px-8 sm:py-4 sm:text-lg"
           >
-            <svg className="w-5 h-5 shrink-0" fill="currentColor" style={{ color: "#2E7D32" }} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-            </svg>
-            <span className="text-sm font-medium" style={{ color: "#2E7D32" }}>
-              @gealdebara238
-            </span>
+            Quero Fazer Parte
+            <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
           </a>
         </div>
       </section>
 
-      {/* Logo Escoteiros do Brasil */}
-      <Image
-        src="/images/escoteiros-do-brasil.png"
-        alt="Escoteiros do Brasil"
-        width={300}
-        height={96}
-        sizes="(max-width: 640px) 200px, 300px"
-        className="w-48 sm:w-72 object-contain mt-16"
-      />
+      {/* Nossos Ramos Section */}
+      <section data-animate className="opacity-0 bg-white px-6 py-16 sm:py-20">
+        <div className="mx-auto max-w-4xl">
+          {/* Section Header */}
+          <div className="mb-12 text-center">
+            <h2 className="mb-3 text-2xl font-bold text-scout-purple sm:text-3xl">
+              Nossos Ramos
+            </h2>
+            <p className="mx-auto max-w-lg text-sm text-scout-gray-500 sm:text-base">
+              O Escotismo acompanha jovens dos 6 aos 21 anos, com atividades adaptadas a cada faixa etária.
+            </p>
+          </div>
+
+          {/* Ramos Grid */}
+          <div className="grid grid-cols-2 gap-8 sm:gap-10 lg:grid-cols-4">
+            {/* Lobinho */}
+            <div className="flex flex-col items-center text-center">
+              <Image
+                src="/images/logos-ramos/Logo_ramo_lobinho_principal.png"
+                alt="Ramo Lobinho"
+                width={140}
+                height={140}
+                className="h-28 w-28 object-contain sm:h-32 sm:w-32 mb-4"
+              />
+              <p className="text-sm text-scout-gray-500">6,5 a 10 anos</p>
+              <p className="text-sm font-bold text-scout-gray-900">&quot;Melhor Possível&quot;</p>
+            </div>
+
+            {/* Escoteiro */}
+            <div className="flex flex-col items-center text-center">
+              <Image
+                src="/images/logos-ramos/Logo_ramo_escoteiro_principal.png"
+                alt="Ramo Escoteiro"
+                width={140}
+                height={140}
+                className="h-28 w-28 object-contain sm:h-32 sm:w-32 mb-4"
+              />
+              <p className="text-sm text-scout-gray-500">11 a 14 anos</p>
+              <p className="text-sm font-bold text-scout-gray-900">&quot;Sempre Alerta&quot;</p>
+            </div>
+
+            {/* Sênior */}
+            <div className="flex flex-col items-center text-center">
+              <Image
+                src="/images/logos-ramos/Logo_ramo_senior_principal.png"
+                alt="Ramo Sênior"
+                width={140}
+                height={140}
+                className="h-28 w-28 object-contain sm:h-32 sm:w-32 mb-4"
+              />
+              <p className="text-sm text-scout-gray-500">15 a 17 anos</p>
+              <p className="text-sm font-bold text-scout-gray-900">&quot;Sempre Alerta&quot;</p>
+            </div>
+
+            {/* Pioneiro */}
+            <div className="flex flex-col items-center text-center">
+              <Image
+                src="/images/logos-ramos/Logo_ramo_pioneiro_principal.png"
+                alt="Ramo Pioneiro"
+                width={140}
+                height={140}
+                className="h-28 w-28 object-contain sm:h-32 sm:w-32 mb-4"
+              />
+              <p className="text-sm text-scout-gray-500">18 a 21 anos</p>
+              <p className="text-sm font-bold text-scout-gray-900">&quot;Servir&quot;</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section data-animate className="opacity-0 bg-scout-gray-50 px-6 py-16 sm:py-20">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="mb-10 text-center text-2xl font-bold text-scout-purple sm:text-3xl">
+            Venha nos Conhecer
+          </h2>
+
+          <div className="grid gap-4 sm:grid-cols-3">
+            {/* Address */}
+            <a
+              href="https://maps.app.goo.gl/NtasM1B8Qmr47jnv9"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 rounded-xl bg-white p-5 shadow-sm transition-all duration-200 hover:shadow-md"
+            >
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-scout-purple">
+                <MapPin className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-scout-gray-500">
+                  Endereço
+                </p>
+                <p className="mt-0.5 text-sm font-medium text-scout-gray-900">
+                  R. Cel. Amando Vergueiro, 30
+                </p>
+              </div>
+            </a>
+
+            {/* Hours */}
+            <div className="flex items-center gap-4 rounded-xl bg-white p-5 shadow-sm">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-scout-purple">
+                <Clock className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-scout-gray-500">
+                  Horário
+                </p>
+                <p className="mt-0.5 text-sm font-medium text-scout-gray-900">
+                  Sábados, 15h às 17h30
+                </p>
+              </div>
+            </div>
+
+            {/* Instagram */}
+            <a
+              href="https://www.instagram.com/gealdebara238"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 rounded-xl bg-white p-5 shadow-sm transition-all duration-200 hover:shadow-md"
+            >
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-scout-purple">
+                <Instagram className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-scout-gray-500">
+                  Instagram
+                </p>
+                <p className="mt-0.5 text-sm font-medium text-scout-purple">
+                  @gealdebara238
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-scout-purple-dark px-6 py-10">
+        <div className="mx-auto flex max-w-4xl flex-col items-center gap-5 text-center">
+          <Image
+            src="/images/escoteiros-do-brasil.png"
+            alt="Escoteiros do Brasil"
+            width={300}
+            height={96}
+            className="w-60 object-contain sm:w-72"
+          />
+          <div className="h-px w-12 bg-white/20" />
+          <p className="text-xs text-white/50">
+            &copy; {new Date().getFullYear()} Grupo Escoteiro Aldebarã 238. Todos os direitos reservados.
+          </p>
+        </div>
+      </footer>
     </main>
   )
 }
