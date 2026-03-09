@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { usePathname } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
@@ -12,6 +13,7 @@ const navLinks = [
 
 export default function Header() {
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
 
   return (
     <header className="sticky top-0 z-50 border-b border-scout-purple-200/40 bg-white/95 backdrop-blur-md">
@@ -21,16 +23,13 @@ export default function Header() {
           <Image
             src="/images/grupo-escoteiro-aldebara.jpeg"
             alt="Logo"
-            width={40}
-            height={40}
-            className="h-10 w-10 rounded-full object-contain"
+            width={48}
+            height={48}
+            className="h-12 w-12 rounded-full object-contain"
           />
-          <div className="hidden sm:block">
-            <p className="text-sm font-bold leading-tight text-scout-purple">
-              Grupo Escoteiro Aldebarã
-            </p>
-            <p className="text-xs text-scout-gray-500">238 – Espírito Santo do Pinhal</p>
-          </div>
+          <p className="text-sm font-bold leading-tight text-scout-purple sm:text-base">
+            Grupo Escoteiro Aldebarã
+          </p>
         </Link>
 
         {/* Desktop Nav */}
@@ -39,7 +38,11 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-semibold text-scout-gray-600 transition-colors hover:text-scout-purple"
+              className={`text-sm font-semibold transition-colors hover:text-scout-purple ${
+                pathname === link.href
+                  ? "border-b-2 border-scout-purple pb-0.5 text-scout-purple"
+                  : "text-scout-gray-600"
+              }`}
             >
               {link.label}
             </Link>
@@ -73,7 +76,11 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2 text-sm font-semibold text-scout-gray-600 transition-colors hover:bg-scout-gray-50 hover:text-scout-purple"
+                className={`rounded-lg px-3 py-2 text-sm font-semibold transition-colors hover:bg-scout-gray-50 hover:text-scout-purple ${
+                  pathname === link.href
+                    ? "bg-scout-purple-50 text-scout-purple"
+                    : "text-scout-gray-600"
+                }`}
               >
                 {link.label}
               </Link>
