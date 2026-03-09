@@ -230,7 +230,7 @@ export default function PatrulhasPage() {
                     </p>
                   </div>
                   <a
-                    href="/docs/cores-de-patrulha-ramo-escoteiro.pdf"
+                    href="/images/docs/cores-de-patrulha-ramo-escoteiro2.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-scout-purple-200 px-4 py-2 text-xs font-semibold text-scout-purple transition-all hover:bg-scout-purple hover:text-white"
@@ -274,7 +274,7 @@ export default function PatrulhasPage() {
                     </p>
                   </div>
                   <a
-                    href="/docs/cores-de-patrulha-ramo-escoteiro.pdf"
+                    href="/images/docs/cores-de-patrulhas-ramo-senior.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-scout-purple-200 px-4 py-2 text-xs font-semibold text-scout-purple transition-all hover:bg-scout-purple hover:text-white"
